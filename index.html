@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المنهج الشامل في اللغة العربية - سن ١٣ سنة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#10312E;
+    --bg-deep2:#0B2422;
+    --parchment:#F3E6C4;
+    --parchment-dark:#E3D2A0;
+    --gold:#D9A441;
+    --gold-light:#F0C878;
+    --coral:#E2572B;
+    --teal:#2F8F82;
+    --ink:#1F2B27;
+    --cream:#F8EFD8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 20% 10%, #163d39 0%, transparent 40%),
+      radial-gradient(circle at 80% 90%, #163d39 0%, transparent 40%),
+      var(--bg-deep);
+    font-family:'Cairo', sans-serif;
+    color:var(--ink);
+    padding-bottom:60px;
+  }
+  h1,h2,h3,.display{font-family:'Lalezar', sans-serif; font-weight:400;}
+
+  /* HERO */
+  .hero{
+    text-align:center;
+    padding:44px 20px 30px;
+    color:var(--cream);
+    border-bottom:3px dashed var(--gold);
+  }
+  .hero .compass{font-size:42px; display:inline-block; animation:spin 8s linear infinite;}
+  @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  .hero h1{font-size:clamp(26px,5.5vw,44px); color:var(--gold-light); margin:8px 0 4px; text-shadow:2px 2px 0 rgba(0,0,0,.35);}
+  .hero p.tagline{font-size:17px; color:var(--parchment); margin:4px 0 16px; opacity:.9;}
+  .hero .teacher{display:inline-block; background:rgba(217,164,65,.15); border:1px solid var(--gold); padding:6px 18px; border-radius:30px; font-size:14px; color:var(--gold-light);}
+  .name-box{max-width:340px; margin:22px auto 0; display:flex; flex-direction:column; gap:8px;}
+  .name-box label{font-size:14px; color:var(--parchment);}
+  .name-box input{padding:11px 16px; border-radius:12px; border:2px solid var(--gold); background:var(--parchment); font-family:'Cairo'; font-size:15px; text-align:center; color:var(--ink);}
+
+  /* TABS */
+  .tabbar{
+    position:sticky; top:0; z-index:20;
+    background:var(--bg-deep2);
+    display:flex; flex-wrap:wrap; justify-content:center; gap:8px;
+    padding:14px 10px; border-bottom:3px solid var(--gold);
+  }
+  .tabbtn{
+    background:transparent; border:2px solid var(--gold); color:var(--gold-light);
+    padding:9px 16px; border-radius:20px; font-family:'Cairo'; font-weight:700;
+    cursor:pointer; font-size:13.5px; transition:.15s;
+  }
+  .tabbtn.active{background:var(--gold); color:var(--ink);}
+  .tabpanel{display:none; max-width:820px; margin:0 auto; padding:30px 18px;}
+  .tabpanel.active{display:block; animation:fadein .3s ease;}
+  @keyframes fadein{from{opacity:0; transform:translateY(6px);}to{opacity:1; transform:translateY(0);}}
+
+  .section-title{
+    text-align:center; color:var(--gold-light); font-size:28px; margin-bottom:6px;
+  }
+  .section-sub{text-align:center; color:var(--parchment); opacity:.85; font-size:14px; margin-bottom:22px;}
+
+  /* ACCORDION (grammar) */
+  details{
+    background:var(--parchment); border:2px solid var(--parchment-dark);
+    border-radius:14px; margin-bottom:16px; padding:14px 18px;
+  }
+  summary{cursor:pointer; font-family:'Lalezar'; font-size:20px; color:var(--teal); outline:none; list-style:none;}
+  summary::-webkit-details-marker{display:none;}
+  summary::before{content:"🔽 "; font-size:15px;}
+  details[open] summary::before{content:"🔼 ";}
+  .rule-text{font-size:15.5px; line-height:2; margin:12px 0;}
+  .example-box{display:flex; gap:10px; margin:10px 0; flex-wrap:wrap;}
+  .ex-good, .ex-bad{border-radius:10px; padding:10px 14px; flex:1; min-width:220px; font-size:14.5px; line-height:1.9;}
+  .ex-good{background:#e7f5ef; border:2px solid var(--teal);}
+  .ex-bad{background:#fbe9e4; border:2px solid var(--coral);}
+  .ex-good::before{content:"✅ ";}
+  .ex-bad::before{content:"❌ ";}
+
+  table{width:100%; border-collapse:collapse; margin:14px 0; background:#fffaec; font-size:13.5px;}
+  th,td{border:1px solid var(--parchment-dark); padding:8px 8px; text-align:center;}
+  th{background:var(--gold-light); font-family:'Cairo'; font-weight:800;}
+
+  /* passages / cards */
+  .card{
+    background:var(--parchment); border:2px solid var(--parchment-dark);
+    border-radius:16px; padding:22px; margin-bottom:28px;
+    box-shadow:0 8px 0 rgba(0,0,0,.15);
+  }
+  .card h3{color:var(--teal); font-size:22px; margin:0 0 10px; text-align:center;}
+  .passage{background:#fffaec; border:1px dashed var(--gold); border-radius:12px; padding:16px 18px; font-size:17.5px; line-height:2.1; margin-bottom:14px;}
+
+  .btn{
+    display:inline-block; background:var(--teal); color:#fff; border:none;
+    padding:11px 20px; border-radius:30px; font-family:'Cairo'; font-weight:700;
+    font-size:14.5px; cursor:pointer; box-shadow:0 4px 0 #1f6a60; transition:transform .1s;
+  }
+  .btn:active{transform:translateY(3px); box-shadow:0 1px 0 #1f6a60;}
+  .btn.coral{background:var(--coral); box-shadow:0 4px 0 #a03918;}
+  .btn.gold{background:var(--gold); color:var(--ink); box-shadow:0 4px 0 #a37a2b;}
+  .center{text-align:center;}
+
+  .q{background:#fffaec; border:1px solid var(--parchment-dark); border-radius:12px; padding:14px 18px; margin-bottom:14px;}
+  .q p.qtext{font-size:16.5px; font-weight:700; margin:0 0 10px;}
+  .options{display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
+  .options label{background:#fff; border:2px solid var(--parchment-dark); border-radius:24px; padding:8px 16px; cursor:pointer; font-size:14.5px; transition:.15s;}
+  .options input{display:none;}
+  .options label:has(input:checked){background:var(--teal); border-color:var(--teal); color:#fff;}
+  .feedback{margin-top:10px; font-size:14px; padding:9px 13px; border-radius:8px; display:none; line-height:1.8;}
+  .feedback.correct{background:#e7f5ef; color:#1f6a60; border:1px solid var(--teal); display:block;}
+  .feedback.wrong{background:#fbe9e4; color:#a03918; border:1px solid var(--coral); display:block;}
+
+  /* writing */
+  .guide-list{font-size:14.5px; line-height:2; background:#fffaec; border:1px dashed var(--gold); border-radius:10px; padding:12px 18px; margin-bottom:12px;}
+  textarea{width:100%; min-height:150px; border-radius:12px; border:2px solid var(--parchment-dark); padding:12px; font-family:'Cairo'; font-size:15px; resize:vertical;}
+  .wordcount{font-size:12.5px; color:#555; text-align:left; margin-top:4px;}
+
+  /* result box */
+  .result-box{max-width:640px; margin:26px auto 0; background:var(--gold-light); border:3px solid var(--gold); border-radius:20px; padding:28px; text-align:center; display:none;}
+  .result-box.show{display:block; animation:pop .4s ease;}
+  @keyframes pop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+  .chest{font-size:56px;}
+  .result-box h2{color:var(--coral); margin:6px 0;}
+  .score-num{font-size:38px; font-family:'Lalezar'; color:var(--teal);}
+  .grade-msg{font-size:16.5px; margin-top:8px;}
+
+  footer.credit{text-align:center; color:var(--parchment); opacity:.6; font-size:13px; margin-top:30px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="compass">🧭</span>
+  <h1>المنهج الشامل في اللغة العربية</h1>
+  <p class="tagline">نحو - قراءة - تعبير - استماع | لسن ١٣ سنة</p>
+  <div class="teacher">📚 إعداد: الأستاذ / مصطفى فهمي</div>
+  <div class="name-box">
+    <label for="studentName">اسم الطالب:</label>
+    <input type="text" id="studentName" placeholder="اكتب اسمك هنا...">
+  </div>
+</div>
+
+<div class="tabbar">
+  <button class="tabbtn active" data-tab="nahw">📘 شرح النحو</button>
+  <button class="tabbtn" data-tab="qiraa">📗 القراءة</button>
+  <button class="tabbtn" data-tab="tabeer">✍️ التعبير</button>
+  <button class="tabbtn" data-tab="istimaa">👂 الاستماع</button>
+  <button class="tabbtn" data-tab="imtihan">🏆 الامتحان النهائي</button>
+</div>
+
+<!-- ============ TAB 1: NAHW (GRAMMAR) ============ -->
+<div class="tabpanel active" id="tab-nahw">
+  <h2 class="section-title">شرح دروس النحو</h2>
+  <p class="section-sub">اقرأ كل قاعدة، وتأمّل الأمثلة الصحيحة والخاطئة لتفهم "ليه دي تنفع ودي ما تنفعش"</p>
+
+  <details open>
+    <summary>١) المضاف والمضاف إليه</summary>
+    <p class="rule-text">
+      <b>الإضافة</b>: نسبة اسم إلى اسم آخر لتخصيصه أو تعريفه.<br>
+      <b>المضاف</b>: الاسم الأول، ولا يُنوَّن أبدًا ولا يدخل عليه "أل" التعريف.<br>
+      <b>المضاف إليه</b>: الاسم الثاني، ويكون <b>مجرورًا دائمًا</b> (بالكسرة أو ما ينوب عنها).
+    </p>
+    <div class="example-box">
+      <div class="ex-good">"هذا كتابُ الطالبِ" - كتاب: مضاف (بدون تنوين) / الطالب: مضاف إليه مجرور بالكسرة. صحيحة.</div>
+      <div class="ex-bad">"هذا كتابٌ الطالبِ" - خطأ، لأن المضاف (كتاب) نُوِّن، والمضاف لا يُنوَّن أبدًا.</div>
+    </div>
+    <div class="example-box">
+      <div class="ex-good">"حديقةُ المدرسةِ واسعةٌ" - إضافة صحيحة.</div>
+      <div class="ex-bad">"الحديقةُ المدرسةِ واسعةٌ" - خطأ، لأنّ "أل" دخلت على المضاف (الحديقة)، وهذا لا يجوز.</div>
+    </div>
+  </details>
+
+  <details>
+    <summary>٢) الفعل اللازم والفعل المتعدي</summary>
+    <p class="rule-text">
+      <b>الفعل اللازم</b>: يكتفي بالفاعل ولا يحتاج إلى مفعول به ليكتمل معناه.<br>
+      <b>الفعل المتعدي</b>: يحتاج إلى مفعول به واحد أو أكثر ليكتمل معناه.<br>
+      <b>كيف تفرّق بينهما؟</b> اسأل: "فعل + ماذا؟" فإن احتاجت الجملة إجابة فالفعل متعدٍ، وإن لم تحتج فهو لازم.
+    </p>
+    <div class="example-box">
+      <div class="ex-good">"نامَ الطفلُ" - فعل لازم، اكتمل المعنى بالفاعل وحده (لا نسأل: نام ماذا؟).</div>
+      <div class="ex-bad">"أكلَ الولدُ" وحدها غير مكتملة المعنى - لأن "أكل" فعل متعدٍ يحتاج مفعولًا به: "أكل الولدُ التفاحةَ".</div>
+    </div>
+    <div class="example-box">
+      <div class="ex-good">"ذهب الولدُ إلى المدرسةِ" - صحيحة، لأن "ذهب" فعل لازم يحتاج حرف جر ليصل إلى الاسم بعده.</div>
+      <div class="ex-bad">"ذهب الولدُ المدرسةَ" - خطأ شائع؛ لا يجوز نصب "المدرسة" مباشرة لأن "ذهب" لازم وليس متعديًا.</div>
+    </div>
+  </details>
+
+  <details>
+    <summary>٣) الفعل الصحيح والفعل المعتل</summary>
+    <p class="rule-text">
+      <b>الفعل الصحيح</b>: خالٍ من حروف العلة (ا، و، ي) في أصل حروفه. وأقسامه: سالم (كتبَ)، مهموز (أكلَ، سألَ)، مضعَّف (مدَّ، ردَّ).<br>
+      <b>الفعل المعتل</b>: يحتوي على حرف علة في أصل حروفه. وأقسامه الأساسية:
+    </p>
+    <table>
+      <tr><th>النوع</th><th>موضع حرف العلة</th><th>مثال</th></tr>
+      <tr><td>مثال</td><td>في أوّل الفعل</td><td>وَعَدَ - يَسَرَ</td></tr>
+      <tr><td>أجوف</td><td>في وسط الفعل</td><td>قالَ - باعَ</td></tr>
+      <tr><td>ناقص</td><td>في آخر الفعل</td><td>دعا - رمى - سعى</td></tr>
+      <tr><td>لفيف مفروق</td><td>في أوّله وآخره</td><td>وقى</td></tr>
+      <tr><td>لفيف مقرون</td><td>في وسطه وآخره</td><td>طوى - روى</td></tr>
+    </table>
+    <div class="example-box">
+      <div class="ex-good">"باعَ" فعل معتل أجوف، لأن حرف العلة (أصله الواو) في وسط الفعل.</div>
+      <div class="ex-bad">تصنيف "باع" على أنه فعل ناقص خطأ؛ فالفعل الناقص حرف علته في الآخر مثل "رمى" وليس في الوسط.</div>
+    </div>
+  </details>
+
+  <details>
+    <summary>٤) المفعولات (المنصوبات الخمسة)</summary>
+    <p class="rule-text">هذه أسماء تُنصب بعد الفعل، وكل واحد منها له وظيفة مختلفة في الجملة:</p>
+    <div class="example-box">
+      <div class="ex-good"><b>المفعول به</b>: من وقع عليه فعل الفاعل. مثال: "قرأ الطالبُ الدرسَ".</div>
+      <div class="ex-good"><b>المفعول المطلق</b>: مصدر من لفظ الفعل يؤكده أو يبيّن نوعه أو عدده. مثال: "انتصر الجيشُ انتصارًا".</div>
+    </div>
+    <div class="example-box">
+      <div class="ex-good"><b>المفعول لأجله</b>: مصدر يبيّن سبب حدوث الفعل. مثال: "وقفتُ احترامًا للمعلم".</div>
+      <div class="ex-good"><b>المفعول فيه (ظرف)</b>: يبيّن زمان أو مكان وقوع الفعل. مثال: "سافرتُ صباحًا" (ظرف زمان) / "جلستُ أمامَ البيتِ" (ظرف مكان).</div>
+    </div>
+    <div class="example-box">
+      <div class="ex-good"><b>المفعول معه</b>: اسم يُذكر بعد واو بمعنى "مع". مثال: "سرتُ والنهرَ" أي: سرت مع النهر.</div>
+      <div class="ex-bad">الخلط الشائع: تسمية "صباحًا" في "سافرتُ صباحًا" مفعولًا به - خطأ، فهي ظرف زمان (مفعول فيه) وليست مفعولًا به لأنها لم يقع عليها الفعل، بل بيّنت وقته.</div>
+    </div>
+  </details>
+
+  <details>
+    <summary>٥) جدول علامات الرفع والنصب والجر والجزم</summary>
+    <table>
+      <tr><th>الحالة</th><th>العلامة الأصلية</th><th>العلامات الفرعية وأمثلتها</th></tr>
+      <tr><td>الرفع</td><td>الضمّة</td><td>الواو (جمع مذكر سالم / الأسماء الخمسة) - الألف (المثنى) - ثبوت النون (الأفعال الخمسة)</td></tr>
+      <tr><td>النصب</td><td>الفتحة</td><td>الكسرة (جمع المؤنث السالم) - الياء (المثنى وجمع المذكر السالم) - الألف (الأسماء الخمسة) - حذف النون (الأفعال الخمسة)</td></tr>
+      <tr><td>الجر</td><td>الكسرة</td><td>الياء (المثنى / جمع المذكر السالم / الأسماء الخمسة) - الفتحة (الممنوع من الصرف)</td></tr>
+      <tr><td>الجزم</td><td>السكون</td><td>حذف حرف العلة (الفعل المعتل الآخر) - حذف النون (الأفعال الخمسة)</td></tr>
+    </table>
+    <p class="rule-text">ملحوظة: الجزم خاص بالفعل المضارع فقط، أما الرفع والنصب والجر فتكون في الأسماء، والرفع والنصب أيضًا يكونان في الفعل المضارع.</p>
+  </details>
+
+  <details>
+    <summary>٦) ليه أصلًا بنرفع أو ننصب أو نجزم؟ (سرّ الإعراب)</summary>
+    <p class="rule-text">
+      <b>الإعراب</b> هو تغيّر حالة آخر الكلمة (حركتها أو حرفها) بسبب تغيّر موقعها ووظيفتها في الجملة. كل موقع نحوي له حالة إعرابية تخصّه:
+    </p>
+    <div class="example-box">
+      <div class="ex-good"><b>نرفع</b>: الفاعل، المبتدأ، الخبر، اسم كان، خبر إنّ، والفعل المضارع إن لم يسبقه ناصب أو جازم (لأن الرفع هو الأصل). مثال: "الطالبُ مجتهدٌ - يذهبُ الطالبُ".</div>
+      <div class="ex-good"><b>ننصب</b>: المفعولات كلها، خبر كان، اسم إنّ، الحال، التمييز، والفعل المضارع إذا سبقه حرف نصب مثل (أن، لن، كي). مثال: "لن يذهبَ الطالبُ".</div>
+      <div class="ex-good"><b>نجزم</b>: الفعل المضارع فقط، إذا سبقه حرف جزم مثل (لم، لام الأمر) أو أداة شرط جازمة. مثال: "لم يذهبْ الطالبُ".</div>
+    </div>
+    <div class="example-box">
+      <div class="ex-bad">"لن يذهبْ الطالبُ" - خطأ؛ لأن "لن" حرف نصب وليس جزمًا، فيجب أن يكون الفعل منصوبًا "لن يذهبَ" وليس مجزومًا.</div>
+      <div class="ex-bad">"لم يذهبَ الطالبُ" - خطأ؛ لأن "لم" حرف جزم، فيجب أن يكون الفعل مجزومًا "لم يذهبْ" وليس منصوبًا.</div>
+    </div>
+  </details>
+</div>
+
+<!-- ============ TAB 2: QIRAA (READING) ============ -->
+<div class="tabpanel" id="tab-qiraa">
+  <h2 class="section-title">القراءة</h2>
+  <p class="section-sub">اقرأ كل قطعة جيدًا ثم أجب عن الأسئلة، وستظهر لك الإجابة الصحيحة فورًا</p>
+
+  <div class="card">
+    <h3>١) عالم عربي عظيم</h3>
+    <div class="passage">وُلِد العالمُ العربيُّ ابنُ سينا في بلادِ فارسَ، وكان مِن أبرزِ علماءِ الطبِّ والفلسفةِ في التاريخِ. حَفِظَ القرآنَ الكريمَ وهو في العاشرةِ من عمرِه، ثم درسَ الطبَّ والرياضياتِ والفلكَ حتى أصبحَ طبيبًا ماهرًا وهو لا يزالُ صغيرَ السنِّ. أَلَّفَ كتابَ "القانون في الطب" الذي ظلَّ يُدرَّسُ في الجامعاتِ الأوروبيةِ لعدةِ قرونٍ. كان ابنُ سينا يؤمنُ بأنَّ العلمَ والاجتهادَ هما سرُّ النجاحِ، ولم يتوقفْ عن القراءةِ والبحثِ طوالَ حياتِه.</div>
+    <div class="q"><p class="qtext">في أي بلاد وُلد ابن سينا؟</p>
+      <div class="options">
+        <label><input type="radio" name="rd1_1" value="1" class="pq" data-explain="✅ صحيح: النص ذكر أنه وُلد في بلاد فارس."><span>فارس</span></label>
+        <label><input type="radio" name="rd1_1" value="0" class="pq" data-explain="❌ غير صحيح: النص ذكر فارس وليس مصر."><span>مصر</span></label>
+        <label><input type="radio" name="rd1_1" value="0" class="pq" data-explain="❌ غير صحيح: النص ذكر فارس وليس الأندلس."><span>الأندلس</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">ماذا حفظ ابن سينا وهو في العاشرة؟</p>
+      <div class="options">
+        <label><input type="radio" name="rd1_2" value="1" class="pq" data-explain="✅ صحيح: حفظ القرآن الكريم كما ذكر النص."><span>القرآن الكريم</span></label>
+        <label><input type="radio" name="rd1_2" value="0" class="pq" data-explain="❌ غير صحيح: النص لم يذكر حفظ الشعر."><span>الشعر</span></label>
+        <label><input type="radio" name="rd1_2" value="0" class="pq" data-explain="❌ غير صحيح: كتاب الطب ألّفه لاحقًا ولم يحفظه في العاشرة."><span>كتاب الطب</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">ما اسم الكتاب الذي ألّفه؟</p>
+      <div class="options">
+        <label><input type="radio" name="rd1_3" value="1" class="pq" data-explain="✅ صحيح: هذا ما ذكره النص."><span>القانون في الطب</span></label>
+        <label><input type="radio" name="rd1_3" value="0" class="pq" data-explain="❌ غير صحيح: هذا كتاب تراثي آخر لم يذكره النص."><span>كليلة ودمنة</span></label>
+        <label><input type="radio" name="rd1_3" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر في النص."><span>ألف ليلة وليلة</span></label>
+      </div><div class="feedback"></div></div>
+  </div>
+
+  <div class="card">
+    <h3>٢) كوكب الأرض الجميل</h3>
+    <div class="passage">تُعدُّ الأرضُ الكوكبَ الوحيدَ الذي يحتضنُ الحياةَ في مجموعتِنا الشمسيةِ حتى الآن. تُغطي المياهُ أكثرَ من سبعينَ بالمئةِ من سطحِها، بينما تشكِّلُ اليابسةُ الجزءَ الباقيَ. وبفضلِ الغلافِ الجويِّ الذي يحيطُ بالأرضِ، تُحفَظُ درجةُ الحرارةِ مناسبةً للإنسانِ والحيوانِ والنباتِ. لكنَّ التلوثَ وقطعَ الأشجارِ يهدِّدان هذا التوازنَ الدقيقَ، لذا يجبُ على كلِّ إنسانٍ أن يشاركَ في حمايةِ كوكبِنا.</div>
+    <div class="q"><p class="qtext">كم نسبة المياه التي تغطي سطح الأرض؟</p>
+      <div class="options">
+        <label><input type="radio" name="rd2_1" value="1" class="pq" data-explain="✅ صحيح: النص ذكر أكثر من ٧٠٪."><span>أكثر من ٧٠٪</span></label>
+        <label><input type="radio" name="rd2_1" value="0" class="pq" data-explain="❌ غير صحيح: النسبة المذكورة أكبر من ٥٠٪."><span>٥٠٪</span></label>
+        <label><input type="radio" name="rd2_1" value="0" class="pq" data-explain="❌ غير صحيح: النسبة أكبر بكثير من ٢٠٪."><span>أقل من ٢٠٪</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">ما الذي يحافظ على درجة حرارة الأرض مناسبة؟</p>
+      <div class="options">
+        <label><input type="radio" name="rd2_2" value="1" class="pq" data-explain="✅ صحيح: الغلاف الجوي كما ذكر النص."><span>الغلاف الجوي</span></label>
+        <label><input type="radio" name="rd2_2" value="0" class="pq" data-explain="❌ غير صحيح: لم يذكر النص ضوء القمر."><span>ضوء القمر</span></label>
+        <label><input type="radio" name="rd2_2" value="0" class="pq" data-explain="❌ غير صحيح: لم يذكر النص الجبال."><span>الجبال</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">ما أحد التهديدات المذكورة للتوازن البيئي؟</p>
+      <div class="options">
+        <label><input type="radio" name="rd2_3" value="1" class="pq" data-explain="✅ صحيح: التلوث وقطع الأشجار كما ذكر النص."><span>التلوث وقطع الأشجار</span></label>
+        <label><input type="radio" name="rd2_3" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر في النص."><span>كثرة الأمطار</span></label>
+        <label><input type="radio" name="rd2_3" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر في النص."><span>البراكين</span></label>
+      </div><div class="feedback"></div></div>
+  </div>
+
+  <div class="card">
+    <h3>٣) درسٌ من سعيد</h3>
+    <div class="passage">شارك سعيدٌ في مسابقةِ الجري المدرسيةِ، فخسِرَ في المرةِ الأولى لأنه لم يتدرَّبْ جيدًا. شعرَ بالحزنِ، لكنَّ والدَه قال له: "الفشلُ ليس نهايةَ الطريقِ، بل بدايةُ التعلُّمِ." فبدأ سعيدٌ يتدرَّبُ كلَّ يومٍ بعد المدرسةِ، وينامُ مبكرًا، ويأكلُ طعامًا صحيًّا. وفي العامِ التالي، شاركَ في المسابقةِ نفسِها وفازَ بالمركزِ الأولِ. تعلَّم سعيدٌ أنَّ المثابرةَ والصبرَ هما طريقُ النجاحِ.</div>
+    <div class="q"><p class="qtext">لماذا خسر سعيد في المرة الأولى؟</p>
+      <div class="options">
+        <label><input type="radio" name="rd3_1" value="1" class="pq" data-explain="✅ صحيح: لأنه لم يتدرب جيدًا كما ذكر النص."><span>لم يتدرب جيدًا</span></label>
+        <label><input type="radio" name="rd3_1" value="0" class="pq" data-explain="❌ غير صحيح: لم يذكر النص أنه كان مريضًا."><span>كان مريضًا</span></label>
+        <label><input type="radio" name="rd3_1" value="0" class="pq" data-explain="❌ غير صحيح: النص ذكر أنه شارك بالفعل."><span>لم يشارك أصلًا</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">ما الذي فعله سعيد بعد خسارته؟</p>
+      <div class="options">
+        <label><input type="radio" name="rd3_2" value="1" class="pq" data-explain="✅ صحيح: تدرّب كل يوم كما ذكر النص."><span>تدرّب كل يوم</span></label>
+        <label><input type="radio" name="rd3_2" value="0" class="pq" data-explain="❌ غير صحيح: بل استمر وتدرب."><span>توقف عن الجري</span></label>
+        <label><input type="radio" name="rd3_2" value="0" class="pq" data-explain="❌ غير صحيح: بل حاول مجددًا بإصرار."><span>بكى ولم يحاول</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">ما الدرس المستفاد من القصة؟</p>
+      <div class="options">
+        <label><input type="radio" name="rd3_3" value="1" class="pq" data-explain="✅ صحيح: هذا هو الدرس الذي أنهى به النص القصة."><span>المثابرة طريق النجاح</span></label>
+        <label><input type="radio" name="rd3_3" value="0" class="pq" data-explain="❌ غير صحيح: القصة تؤكد عكس ذلك تمامًا."><span>الفوز لا يحتاج مجهود</span></label>
+        <label><input type="radio" name="rd3_3" value="0" class="pq" data-explain="❌ غير صحيح: القصة تشجع على المحاولة لا الاستسلام."><span>يجب الاستسلام عند الفشل</span></label>
+      </div><div class="feedback"></div></div>
+  </div>
+
+  <div class="card">
+    <h3>٤) فوائد القراءة</h3>
+    <div class="passage">القراءةُ غذاءُ العقلِ ومفتاحُ المعرفةِ. فهي تُوسِّعُ مداركَ الإنسانِ، وتزيدُ من ثروتِه اللغويةِ، وتُنمِّي خيالَه وقدرتَه على التفكيرِ. كما أنَّ القراءةَ المنتظمةَ تُقلِّلُ التوترَ وتُحسِّنُ التركيزَ. ولذلك ينصحُ المعلمونَ الطلابَ بتخصيصِ وقتٍ يوميٍّ للقراءةِ، ولو كان عشرَ دقائقَ فقط.</div>
+    <div class="q"><p class="qtext">بماذا وصف النص القراءة؟</p>
+      <div class="options">
+        <label><input type="radio" name="rd4_1" value="1" class="pq" data-explain="✅ صحيح: هذا وصف النص لها في أول جملة."><span>غذاء العقل</span></label>
+        <label><input type="radio" name="rd4_1" value="0" class="pq" data-explain="❌ غير صحيح: النص لم يصفها هكذا بل أثنى عليها."><span>مضيعة للوقت</span></label>
+        <label><input type="radio" name="rd4_1" value="0" class="pq" data-explain="❌ غير صحيح: لم يستخدم النص هذا الوصف."><span>لعبة ممتعة فقط</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">ماذا تفعل القراءة المنتظمة حسب النص؟</p>
+      <div class="options">
+        <label><input type="radio" name="rd4_2" value="1" class="pq" data-explain="✅ صحيح: هذا ما ذكره النص بالضبط."><span>تقلل التوتر وتحسن التركيز</span></label>
+        <label><input type="radio" name="rd4_2" value="0" class="pq" data-explain="❌ غير صحيح: النص ذكر فائدة عكس ذلك."><span>تسبب النعاس</span></label>
+        <label><input type="radio" name="rd4_2" value="0" class="pq" data-explain="❌ غير صحيح: النص ذكر أنها تزيد الثروة اللغوية."><span>تضعف اللغة</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">بماذا ينصح المعلمون الطلاب؟</p>
+      <div class="options">
+        <label><input type="radio" name="rd4_3" value="1" class="pq" data-explain="✅ صحيح: هذا ما ذكره النص في الجملة الأخيرة."><span>تخصيص وقت يومي للقراءة</span></label>
+        <label><input type="radio" name="rd4_3" value="0" class="pq" data-explain="❌ غير صحيح: النص يشجع على القراءة لا تركها."><span>ترك القراءة في العطلة</span></label>
+        <label><input type="radio" name="rd4_3" value="0" class="pq" data-explain="❌ غير صحيح: لم يذكر النص ذلك."><span>قراءة كتاب واحد فقط في العمر</span></label>
+      </div><div class="feedback"></div></div>
+  </div>
+</div>
+
+<!-- ============ TAB 3: TABEER (WRITING) ============ -->
+<div class="tabpanel" id="tab-tabeer">
+  <h2 class="section-title">التعبير</h2>
+  <p class="section-sub">اختر موضوعًا واكتب فيه، مستعينًا بالنقاط الموجّهة. اكتب بين ١٢٠ و١٨٠ كلمة</p>
+
+  <div class="card">
+    <h3>١) رحلة لا تُنسى (وصفي)</h3>
+    <div class="guide-list">
+      <b>المقدمة:</b> متى وأين كانت الرحلة؟<br>
+      <b>العرض:</b> صف المكان، ماذا رأيت وشعرت به، أهم موقف حدث.<br>
+      <b>الخاتمة:</b> ما الذي تعلمته أو أحسست به بعد الرحلة؟
+    </div>
+    <textarea class="wtext" data-target="wc1" placeholder="اكتب موضوعك هنا..."></textarea>
+    <div class="wordcount" id="wc1">عدد الكلمات: 0</div>
+  </div>
+
+  <div class="card">
+    <h3>٢) الهواتف الذكية بين الطلاب (رأي)</h3>
+    <div class="guide-list">
+      <b>المقدمة:</b> عرّف باختصار عن انتشار الهواتف الذكية بين الطلاب.<br>
+      <b>العرض:</b> اذكر إيجابيات (التواصل، البحث) وسلبيات (تشتت الانتباه، إدمان الشاشة).<br>
+      <b>الخاتمة:</b> رأيك الشخصي، وكيف يمكن استخدامها باعتدال.
+    </div>
+    <textarea class="wtext" data-target="wc2" placeholder="اكتب موضوعك هنا..."></textarea>
+    <div class="wordcount" id="wc2">عدد الكلمات: 0</div>
+  </div>
+
+  <div class="card">
+    <h3>٣) صديقان اختلفا ثم تصالحا (قصصي)</h3>
+    <div class="guide-list">
+      <b>المقدمة:</b> عرّف بالصديقين وعلاقتهما.<br>
+      <b>العرض:</b> ما سبب الخلاف؟ ماذا حدث بينهما؟<br>
+      <b>الخاتمة:</b> كيف تصالحا؟ وما الدرس المستفاد من الصداقة؟
+    </div>
+    <textarea class="wtext" data-target="wc3" placeholder="اكتب موضوعك هنا..."></textarea>
+    <div class="wordcount" id="wc3">عدد الكلمات: 0</div>
+  </div>
+
+  <div class="card">
+    <h3>٤) أهمية القراءة في حياة الإنسان (معلوماتي)</h3>
+    <div class="guide-list">
+      <b>المقدمة:</b> عرّف بالقراءة وأهميتها بشكل عام.<br>
+      <b>العرض:</b> اذكر فوائدها للعقل واللغة والمستقبل الدراسي.<br>
+      <b>الخاتمة:</b> ادعُ زملاءك إلى جعل القراءة عادة يومية.
+    </div>
+    <textarea class="wtext" data-target="wc4" placeholder="اكتب موضوعك هنا..."></textarea>
+    <div class="wordcount" id="wc4">عدد الكلمات: 0</div>
+  </div>
+</div>
+
+<!-- ============ TAB 4: ISTIMAA (LISTENING) ============ -->
+<div class="tabpanel" id="tab-istimaa">
+  <h2 class="section-title">الاستماع</h2>
+  <p class="section-sub">اضغط زر الاستماع لتسمع القطعة، ثم أجب عن الأسئلة</p>
+
+  <div class="card">
+    <h3>١) ابن الهيثم رائد علم البصريات</h3>
+    <div class="center"><button class="btn gold listen-btn">🔊 استمع إلى القطعة</button></div>
+    <div class="passage lp" style="margin-top:14px;">يُعدُّ الحسنُ بنُ الهيثمِ أحدَ أعظمِ علماءِ العربِ في مجالِ الفيزياء والبصرياتِ. اكتشفَ كيف تنتقلُ الرؤيةُ من الأشياءِ إلى العينِ، وألّفَ كتابَ "المناظر" الذي أسّسَ لعلمِ البصرياتِ الحديثِ. استخدمَ ابنُ الهيثمِ التجربةَ العلميةَ للتحقُّقِ من نظرياتِه، ولذلك يُلقَّبُ بأبي علمِ البصرياتِ.</div>
+    <div class="q"><p class="qtext">في أي مجال برز ابن الهيثم؟</p>
+      <div class="options">
+        <label><input type="radio" name="ls1_1" value="1" class="pq" data-explain="✅ صحيح: الفيزياء والبصريات كما ذكر النص."><span>الفيزياء والبصريات</span></label>
+        <label><input type="radio" name="ls1_1" value="0" class="pq" data-explain="❌ غير صحيح: لم يذكر النص الطب."><span>الطب</span></label>
+        <label><input type="radio" name="ls1_1" value="0" class="pq" data-explain="❌ غير صحيح: لم يذكر النص الفلك."><span>الفلك</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">ما اسم الكتاب الذي ألّفه؟</p>
+      <div class="options">
+        <label><input type="radio" name="ls1_2" value="1" class="pq" data-explain="✅ صحيح: كتاب المناظر كما ذكر النص."><span>المناظر</span></label>
+        <label><input type="radio" name="ls1_2" value="0" class="pq" data-explain="❌ غير صحيح: هذا كتاب ابن سينا وليس ابن الهيثم."><span>القانون</span></label>
+        <label><input type="radio" name="ls1_2" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر في النص."><span>الشفاء</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">بماذا يُلقَّب ابن الهيثم؟</p>
+      <div class="options">
+        <label><input type="radio" name="ls1_3" value="1" class="pq" data-explain="✅ صحيح: هذا اللقب المذكور في النص."><span>أبو علم البصريات</span></label>
+        <label><input type="radio" name="ls1_3" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر هذا اللقب."><span>أبو الطب</span></label>
+        <label><input type="radio" name="ls1_3" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر هذا اللقب."><span>أبو الكيمياء</span></label>
+      </div><div class="feedback"></div></div>
+  </div>
+
+  <div class="card">
+    <h3>٢) قطرةٌ من ماء</h3>
+    <div class="center"><button class="btn gold listen-btn">🔊 استمع إلى القطعة</button></div>
+    <div class="passage lp" style="margin-top:14px;">الماءُ نعمةٌ عظيمةٌ يجبُ أن نحافظَ عليها. فكثيرٌ من الناسِ يتركون الصنبورَ مفتوحًا دون داعٍ. وفي بعضِ مناطقِ العالمِ، يعاني الأطفالُ من نقصِ المياهِ النظيفةِ، ويمشون مسافاتٍ طويلةً يوميًّا لإحضارِها. لذلك، علينا أن نُغلقَ الصنبورَ أثناءَ تنظيفِ أسنانِنا، ونُصلحَ أيَّ تسريبٍ في المنزلِ.</div>
+    <div class="q"><p class="qtext">ما الخطأ الشائع الذي يفعله بعض الناس؟</p>
+      <div class="options">
+        <label><input type="radio" name="ls2_1" value="1" class="pq" data-explain="✅ صحيح: ترك الصنبور مفتوحًا كما ذكر النص."><span>ترك الصنبور مفتوحًا</span></label>
+        <label><input type="radio" name="ls2_1" value="0" class="pq" data-explain="❌ غير صحيح: هذا سلوك جيد وليس خطأ."><span>غسل الأسنان</span></label>
+        <label><input type="radio" name="ls2_1" value="0" class="pq" data-explain="❌ غير صحيح: هذا حل وليس خطأ."><span>إصلاح التسريب</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">ماذا يعاني بعض الأطفال في العالم؟</p>
+      <div class="options">
+        <label><input type="radio" name="ls2_2" value="1" class="pq" data-explain="✅ صحيح: نقص المياه النظيفة كما ذكر النص."><span>نقص المياه النظيفة</span></label>
+        <label><input type="radio" name="ls2_2" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر في النص."><span>كثرة الأمطار</span></label>
+        <label><input type="radio" name="ls2_2" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر في النص."><span>الفيضانات</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">ما الحل المقترح في النص؟</p>
+      <div class="options">
+        <label><input type="radio" name="ls2_3" value="1" class="pq" data-explain="✅ صحيح: هذا ما ذكره النص بالضبط."><span>إغلاق الصنبور وإصلاح التسريب</span></label>
+        <label><input type="radio" name="ls2_3" value="0" class="pq" data-explain="❌ غير صحيح: لم يقترح النص ذلك."><span>شرب مياه أقل</span></label>
+        <label><input type="radio" name="ls2_3" value="0" class="pq" data-explain="❌ غير صحيح: لم يقترح النص ذلك."><span>عدم الاستحمام</span></label>
+      </div><div class="feedback"></div></div>
+  </div>
+
+  <div class="card">
+    <h3>٣) الصدق منجاة</h3>
+    <div class="center"><button class="btn gold listen-btn">🔊 استمع إلى القطعة</button></div>
+    <div class="passage lp" style="margin-top:14px;">كسر أحمدُ نافذةَ الجيرانِ أثناءَ اللعبِ بالكرةِ، وخافَ أن يخبرَ أحدًا. فكّر أن يهربَ ولا يعترفَ، لكنَّه تذكَّرَ نصيحةَ والدِه: "الصدقُ منجاةٌ مهما كانتِ النتيجةُ." فذهبَ أحمدُ إلى الجيرانِ واعترفَ بما فعلَ، واعتذرَ، وعرضَ أن يدفعَ ثمنَ إصلاحِ النافذةِ. أُعجِبَ الجيرانُ بصدقِه وسامحوه.</div>
+    <div class="q"><p class="qtext">ماذا فعل أحمد أثناء اللعب؟</p>
+      <div class="options">
+        <label><input type="radio" name="ls3_1" value="1" class="pq" data-explain="✅ صحيح: كسر نافذة الجيران كما ذكر النص."><span>كسر نافذة الجيران</span></label>
+        <label><input type="radio" name="ls3_1" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر ذلك."><span>أضاع الكرة</span></label>
+        <label><input type="radio" name="ls3_1" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر ذلك."><span>آذى صديقه</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">ماذا قرر أحمد أن يفعل في النهاية؟</p>
+      <div class="options">
+        <label><input type="radio" name="ls3_2" value="1" class="pq" data-explain="✅ صحيح: اعترف واعتذر كما ذكر النص."><span>الاعتراف والاعتذار</span></label>
+        <label><input type="radio" name="ls3_2" value="0" class="pq" data-explain="❌ غير صحيح: هذا ما فكر فيه أولًا لكنه لم يفعله."><span>الهروب</span></label>
+        <label><input type="radio" name="ls3_2" value="0" class="pq" data-explain="❌ غير صحيح: لم يخفِ الأمر بل اعترف به."><span>إخفاء الأمر</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">كيف كانت ردة فعل الجيران؟</p>
+      <div class="options">
+        <label><input type="radio" name="ls3_3" value="1" class="pq" data-explain="✅ صحيح: سامحوه وأثنوا عليه كما ذكر النص."><span>سامحوه وأثنوا عليه</span></label>
+        <label><input type="radio" name="ls3_3" value="0" class="pq" data-explain="❌ غير صحيح: النص ذكر عكس ذلك."><span>غضبوا منه</span></label>
+        <label><input type="radio" name="ls3_3" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر ذلك."><span>اشتكوا لوالده</span></label>
+      </div><div class="feedback"></div></div>
+  </div>
+
+  <div class="card">
+    <h3>٤) فوائد الرياضة</h3>
+    <div class="center"><button class="btn gold listen-btn">🔊 استمع إلى القطعة</button></div>
+    <div class="passage lp" style="margin-top:14px;">ممارسةُ الرياضةِ بانتظامٍ تُقوِّي الجسمَ وتحمي من كثيرٍ من الأمراضِ، كما أنها تُحسِّنُ المزاجَ وتُقلِّلُ التوترَ والقلقَ. ولا يُشترطُ أن تكونَ الرياضةُ احترافيةً، فالمشيُ نصفَ ساعةٍ يوميًّا يكفي لتحقيقِ فوائدَ صحيةٍ كبيرةٍ. ينصحُ الأطباءُ بممارسةِ الرياضةِ قبلَ الدراسةِ لأنها تزيدُ من التركيزِ والنشاطِ.</div>
+    <div class="q"><p class="qtext">ماذا تحمي الرياضة حسب النص؟</p>
+      <div class="options">
+        <label><input type="radio" name="ls4_1" value="1" class="pq" data-explain="✅ صحيح: تحمي من الأمراض كما ذكر النص."><span>من الأمراض</span></label>
+        <label><input type="radio" name="ls4_1" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر ذلك مباشرة."><span>النجاح المدرسي فقط</span></label>
+        <label><input type="radio" name="ls4_1" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر ذلك."><span>النوم الكثير</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">ما مثال على رياضة بسيطة ذُكر في النص؟</p>
+      <div class="options">
+        <label><input type="radio" name="ls4_2" value="1" class="pq" data-explain="✅ صحيح: المشي كما ذكر النص."><span>المشي</span></label>
+        <label><input type="radio" name="ls4_2" value="0" class="pq" data-explain="❌ غير صحيح: النص لم يذكرها تحديدًا."><span>كرة القدم الاحترافية</span></label>
+        <label><input type="radio" name="ls4_2" value="0" class="pq" data-explain="❌ غير صحيح: النص لم يذكرها تحديدًا."><span>السباحة الأولمبية</span></label>
+      </div><div class="feedback"></div></div>
+    <div class="q"><p class="qtext">لماذا ينصح الأطباء بالرياضة قبل الدراسة؟</p>
+      <div class="options">
+        <label><input type="radio" name="ls4_3" value="1" class="pq" data-explain="✅ صحيح: لأنها تزيد التركيز والنشاط كما ذكر النص."><span>تزيد التركيز والنشاط</span></label>
+        <label><input type="radio" name="ls4_3" value="0" class="pq" data-explain="❌ غير صحيح: النص ذكر فائدة عكس ذلك."><span>تسبب التعب</span></label>
+        <label><input type="radio" name="ls4_3" value="0" class="pq" data-explain="❌ غير صحيح: لم يُذكر ذلك."><span>تقلل الشهية</span></label>
+      </div><div class="feedback"></div></div>
+  </div>
+</div>
+
+<!-- ============ TAB 5: FINAL EXAM ============ -->
+<div class="tabpanel" id="tab-imtihan">
+  <h2 class="section-title">الامتحان النهائي - النحو</h2>
+  <p class="section-sub">اختر الإجابة الصحيحة، وستظهر لك فورًا لماذا هي صحيحة، ولماذا الإجابات الأخرى خاطئة</p>
+
+  <div class="q"><p class="qtext">١) أي الجملتين صحيحة نحويًا؟</p>
+    <div class="options">
+      <label><input type="radio" name="fx1" value="1" class="pq" data-explain="✅ صحيح: المضاف (كتابُ) لم يُنوَّن، والمضاف إليه (الطالبِ) مجرور بالكسرة، وهذه قاعدة الإضافة الصحيحة."><span>هذا كتابُ الطالبِ</span></label>
+      <label><input type="radio" name="fx1" value="0" class="pq" data-explain="❌ غير صحيح: لا يجوز تنوين المضاف؛ كلمة (كتاب) هنا مضاف ويجب حذف التنوين منها."><span>هذا كتابٌ الطالبِ</span></label>
+    </div><div class="feedback"></div></div>
+
+  <div class="q"><p class="qtext">٢) أكمل: "ذهب الولدُ ....."</p>
+    <div class="options">
+      <label><input type="radio" name="fx2" value="0" class="pq" data-explain="❌ غير صحيح: (ذهب) فعل لازم لا يتعدى إلى المفعول به مباشرة، فلا يصح نصب (المدرسة) بعده مباشرة."><span>المدرسةَ</span></label>
+      <label><input type="radio" name="fx2" value="1" class="pq" data-explain="✅ صحيح: بما أنّ (ذهب) فعل لازم، فهو يحتاج إلى حرف جر (إلى) ليصل إلى الاسم بعده."><span>إلى المدرسةِ</span></label>
+    </div><div class="feedback"></div></div>
+
+  <div class="q"><p class="qtext">٣) صنّف الفعل "باعَ":</p>
+    <div class="options">
+      <label><input type="radio" name="fx3" value="0" class="pq" data-explain="❌ غير صحيح: الفعل يحتوي حرف علة، فليس صحيحًا سالمًا."><span>صحيح سالم</span></label>
+      <label><input type="radio" name="fx3" value="0" class="pq" data-explain="❌ غير صحيح: المثال حرف علته في أوله، وهنا حرف العلة في الوسط."><span>معتل مثال</span></label>
+      <label><input type="radio" name="fx3" value="1" class="pq" data-explain="✅ صحيح: حرف العلة (أصله واو) وقع في وسط الفعل، وهذا تعريف الفعل الأجوف."><span>معتل أجوف</span></label>
+      <label><input type="radio" name="fx3" value="0" class="pq" data-explain="❌ غير صحيح: الناقص حرف علته في الآخر مثل (رمى)، وهنا في الوسط."><span>معتل ناقص</span></label>
+    </div><div class="feedback"></div></div>
+
+  <div class="q"><p class="qtext">٤) صنّف الفعل "رمى":</p>
+    <div class="options">
+      <label><input type="radio" name="fx4" value="0" class="pq" data-explain="❌ غير صحيح: المثال حرف علته في أوله، وهنا في الآخر."><span>معتل مثال</span></label>
+      <label><input type="radio" name="fx4" value="0" class="pq" data-explain="❌ غير صحيح: الأجوف حرف علته في الوسط، وهنا في الآخر."><span>معتل أجوف</span></label>
+      <label><input type="radio" name="fx4" value="1" class="pq" data-explain="✅ صحيح: حرف العلة (الألف المتحولة عن ياء) وقع في آخر الفعل، وهذا تعريف الفعل الناقص."><span>معتل ناقص</span></label>
+      <label><input type="radio" name="fx4" value="0" class="pq" data-explain="❌ غير صحيح: الفعل يحتوي حرف علة فليس صحيحًا مضعّفًا."><span>صحيح مضعّف</span></label>
+    </div><div class="feedback"></div></div>
+
+  <div class="q"><p class="qtext">٥) ما نوع المفعول في: "سافرتُ صباحًا"؟</p>
+    <div class="options">
+      <label><input type="radio" name="fx5" value="0" class="pq" data-explain="❌ غير صحيح: المفعول به يقع عليه فعل الفاعل، و(صباحًا) لم يقع عليها السفر بل بيّنت وقته."><span>مفعول به</span></label>
+      <label><input type="radio" name="fx5" value="0" class="pq" data-explain="❌ غير صحيح: المفعول المطلق مصدر من لفظ الفعل نفسه، و(صباحًا) ليست مصدرًا لـ(سافر)."><span>مفعول مطلق</span></label>
+      <label><input type="radio" name="fx5" value="1" class="pq" data-explain="✅ صحيح: كلمة (صباحًا) تبيّن زمان وقوع الفعل، فهي مفعول فيه (ظرف زمان)."><span>مفعول فيه (ظرف زمان)</span></label>
+      <label><input type="radio" name="fx5" value="0" class="pq" data-explain="❌ غير صحيح: المفعول لأجله يبيّن السبب، و(صباحًا) تبيّن الزمان لا السبب."><span>مفعول لأجله</span></label>
+    </div><div class="feedback"></div></div>
+
+  <div class="q"><p class="qtext">٦) ما نوع المفعول في: "وقفتُ احترامًا للمعلم"؟</p>
+    <div class="options">
+      <label><input type="radio" name="fx6" value="1" class="pq" data-explain="✅ صحيح: كلمة (احترامًا) تبيّن سبب الوقوف، وهذا تعريف المفعول لأجله."><span>مفعول لأجله</span></label>
+      <label><input type="radio" name="fx6" value="0" class="pq" data-explain="❌ غير صحيح: المفعول المطلق يكون من لفظ الفعل نفسه، و(احترامًا) ليست من لفظ (وقف)."><span>مفعول مطلق</span></label>
+      <label><input type="radio" name="fx6" value="0" class="pq" data-explain="❌ غير صحيح: المفعول فيه يبيّن زمانًا أو مكانًا، و(احترامًا) تبيّن السبب."><span>مفعول فيه</span></label>
+      <label><input type="radio" name="fx6" value="0" class="pq" data-explain="❌ غير صحيح: المفعول معه يأتي بعد واو بمعنى (مع)، ولا توجد هنا."><span>مفعول معه</span></label>
+    </div><div class="feedback"></div></div>
+
+  <div class="q"><p class="qtext">٧) ما نوع المفعول في: "انتصر الجيشُ انتصارًا عظيمًا"؟</p>
+    <div class="options">
+      <label><input type="radio" name="fx7" value="1" class="pq" data-explain="✅ صحيح: كلمة (انتصارًا) مصدر من لفظ الفعل (انتصر) نفسه، جاءت لتوكيد المعنى، وهذا هو المفعول المطلق."><span>مفعول مطلق</span></label>
+      <label><input type="radio" name="fx7" value="0" class="pq" data-explain="❌ غير صحيح: المفعول به يقع عليه الفعل من غير الفاعل، أما هنا فالكلمة مصدر يؤكد الفعل نفسه."><span>مفعول به</span></label>
+      <label><input type="radio" name="fx7" value="0" class="pq" data-explain="❌ غير صحيح: المفعول فيه يبيّن زمانًا أو مكانًا، وهذا غير موجود هنا."><span>مفعول فيه</span></label>
+      <label><input type="radio" name="fx7" value="0" class="pq" data-explain="❌ غير صحيح: المفعول لأجله يبيّن السبب، و(انتصارًا) تؤكد الفعل لا تبيّن سببه."><span>مفعول لأجله</span></label>
+    </div><div class="feedback"></div></div>
+
+  <div class="q"><p class="qtext">٨) ما علامة رفع الفعل المضارع في: "الطالبُ يكتبُ الدرسَ"؟</p>
+    <div class="options">
+      <label><input type="radio" name="fx8" value="1" class="pq" data-explain="✅ صحيح: الفعل (يكتبُ) مضارع صحيح الآخر ولم يسبقه ناصب ولا جازم، فيُرفع بالضمة الظاهرة."><span>الضمة الظاهرة</span></label>
+      <label><input type="radio" name="fx8" value="0" class="pq" data-explain="❌ غير صحيح: ثبوت النون علامة رفع خاصة بالأفعال الخمسة، و(يكتبُ) ليس منها."><span>ثبوت النون</span></label>
+      <label><input type="radio" name="fx8" value="0" class="pq" data-explain="❌ غير صحيح: الألف علامة رفع المثنى في الأسماء، لا علاقة لها بالفعل المضارع."><span>الألف</span></label>
+      <label><input type="radio" name="fx8" value="0" class="pq" data-explain="❌ غير صحيح: الواو علامة رفع جمع المذكر السالم أو الأسماء الخمسة، لا الفعل المضارع الصحيح."><span>الواو</span></label>
+    </div><div class="feedback"></div></div>
+
+  <div class="q"><p class="qtext">٩) ما علامة نصب الفعل المضارع في: "لن يذهبَ أحمدُ غدًا"؟</p>
+    <div class="options">
+      <label><input type="radio" name="fx9" value="1" class="pq" data-explain="✅ صحيح: سبق الفعل المضارع (يذهبَ) حرف نصب وهو (لن)، فيُنصب بالفتحة الظاهرة."><span>الفتحة الظاهرة</span></label>
+      <label><input type="radio" name="fx9" value="0" class="pq" data-explain="❌ غير صحيح: حذف النون علامة نصب خاصة بالأفعال الخمسة، وليس هذا الفعل منها."><span>حذف النون</span></label>
+      <label><input type="radio" name="fx9" value="0" class="pq" data-explain="❌ غير صحيح: السكون علامة جزم لا نصب."><span>السكون</span></label>
+      <label><input type="radio" name="fx9" value="0" class="pq" data-explain="❌ غير صحيح: الياء ليست من علامات نصب الفعل المضارع المفرد."><span>الياء</span></label>
+    </div><div class="feedback"></div></div>
+
+  <div class="q"><p class="qtext">١٠) ما علامة جزم الفعل المضارع في: "لم يذهبْ أحمدُ أمس"؟</p>
+    <div class="options">
+      <label><input type="radio" name="fx10" value="1" class="pq" data-explain="✅ صحيح: سبق الفعل المضارع (يذهبْ) حرف جزم وهو (لم)، فيُجزم بالسكون لأنه صحيح الآخر."><span>السكون</span></label>
+      <label><input type="radio" name="fx10" value="0" class="pq" data-explain="❌ غير صحيح: الفتحة علامة نصب، وهنا الفعل مجزوم لا منصوب."><span>الفتحة</span></label>
+      <label><input type="radio" name="fx10" value="0" class="pq" data-explain="❌ غير صحيح: حذف حرف العلة يكون في الفعل المعتل الآخر، و(يذهب) صحيح الآخر."><span>حذف حرف العلة</span></label>
+      <label><input type="radio" name="fx10" value="0" class="pq" data-explain="❌ غير صحيح: حذف النون علامة جزم خاصة بالأفعال الخمسة، وليس هذا منها."><span>حذف النون</span></label>
+    </div><div class="feedback"></div></div>
+
+  <div class="center">
+    <button class="btn coral" id="finishBtn" style="font-size:17px;padding:15px 34px;">🏆 تسليم امتحان النحو</button>
+  </div>
+
+  <div class="result-box" id="resultBox">
+    <div class="chest" id="chestIcon">📦</div>
+    <h2 id="resultName">أحسنت أيها الطالب!</h2>
+    <div class="score-num" id="scoreNum"></div>
+    <p class="grade-msg" id="gradeMsg"></p>
+    <p class="grade-msg" id="sendStatus" style="font-size:13px;opacity:.85;"></p>
+  </div>
+</div>
+
+<footer class="credit">تصميم منهج تفاعلي - الأستاذ مصطفى فهمي 🌿</footer>
+
+<script>
+  // ---------- TABS ----------
+  document.querySelectorAll('.tabbtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tabbtn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tabpanel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // ---------- PRACTICE QUESTIONS (instant feedback) ----------
+  document.querySelectorAll('.pq').forEach(radio => {
+    radio.addEventListener('change', function () {
+      const q = this.closest('.q');
+      const fb = q.querySelector('.feedback');
+      fb.textContent = this.dataset.explain;
+      fb.className = 'feedback ' + (this.value === '1' ? 'correct' : 'wrong');
+    });
+  });
+
+  // ---------- LISTENING (TTS) ----------
+  document.querySelectorAll('.listen-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!('speechSynthesis' in window)) {
+        alert('عذرًا، متصفحك لا يدعم خاصية القراءة الصوتية.');
+        return;
+      }
+      const text = btn.closest('.card').querySelector('.lp').textContent.trim();
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      const voices = window.speechSynthesis.getVoices();
+      const arVoice = voices.find(v => v.lang && v.lang.startsWith('ar'));
+      if (arVoice) utter.voice = arVoice;
+      utter.lang = 'ar-SA';
+      utter.rate = 0.9;
+      window.speechSynthesis.speak(utter);
+    });
+  });
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+  }
+
+  // ---------- WRITING WORD COUNTER ----------
+  document.querySelectorAll('.wtext').forEach(ta => {
+    ta.addEventListener('input', () => {
+      const words = ta.value.trim().split(/\s+/).filter(Boolean).length;
+      document.getElementById(ta.dataset.target).textContent = `عدد الكلمات: ${words}`;
+    });
+  });
+
+  // ---------- FINAL EXAM SCORING + EMAIL ----------
+  const groups = ['fx1','fx2','fx3','fx4','fx5','fx6','fx7','fx8','fx9','fx10'];
+  const fxLabels = {
+    fx1:'المضاف والمضاف إليه', fx2:'الفعل اللازم', fx3:'الفعل الأجوف', fx4:'الفعل الناقص',
+    fx5:'المفعول فيه', fx6:'المفعول لأجله', fx7:'المفعول المطلق',
+    fx8:'رفع الفعل المضارع', fx9:'نصب الفعل المضارع', fx10:'جزم الفعل المضارع'
+  };
+
+  document.getElementById('finishBtn').addEventListener('click', async () => {
+    let correct = 0, answered = 0;
+    const detailLines = [];
+    groups.forEach(name => {
+      const checked = document.querySelector(`input[name="${name}"]:checked`);
+      const label = fxLabels[name] || name;
+      if (checked) {
+        answered++;
+        const ok = checked.value === '1';
+        if (ok) correct++;
+        detailLines.push(`${label}: ${checked.nextElementSibling.textContent} ${ok ? '✔' : '✘'}`);
+      } else {
+        detailLines.push(`${label}: (لم يُجب) ✘`);
+      }
+    });
+    const total = groups.length;
+    const percent = Math.round((correct / total) * 100);
+
+    let grade = '';
+    if (percent >= 90) grade = 'ممتاز! إتقان رائع لقواعد النحو 🌟';
+    else if (percent >= 75) grade = 'جيد جدًا! فهم قوي مع بعض المراجعة البسيطة 🏅';
+    else if (percent >= 50) grade = 'جيد، راجع القواعد التي أخطأت فيها 💪';
+    else grade = 'يحتاج مراجعة شرح النحو مرة أخرى قبل المحاولة التالية 🌱';
+
+    const studentName = document.getElementById('studentName').value.trim() || 'بدون اسم';
+    document.getElementById('resultName').textContent = studentName !== 'بدون اسم'
+      ? `أحسنت يا ${studentName}!`
+      : 'أحسنت أيها الطالب!';
+    document.getElementById('scoreNum').textContent = `${correct} / ${total}`;
+    document.getElementById('gradeMsg').textContent =
+      `${grade}  (أجبت عن ${answered} من ${total} سؤالًا)`;
+
+    const box = document.getElementById('resultBox');
+    box.classList.add('show');
+    document.getElementById('chestIcon').textContent = percent >= 50 ? '🏆' : '📦';
+    box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    const sendStatus = document.getElementById('sendStatus');
+    sendStatus.textContent = 'جارٍ إرسال النتيجة إلى المعلم...';
+
+    try {
+      const response = await fetch('https://formspree.io/f/xgojreqn', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          'المنهج': 'امتحان النحو النهائي - سن 13',
+          'اسم الطالب': studentName,
+          'النتيجة': `${correct} / ${total} (${percent}%)`,
+          'التقييم': grade,
+          'تفاصيل الإجابات': detailLines.join('\n')
+        })
+      });
+      if (response.ok) {
+        sendStatus.textContent = '✅ تم إرسال النتيجة إلى المعلم بنجاح';
+      } else {
+        sendStatus.textContent = '⚠️ حدث خطأ أثناء الإرسال، برجاء إخبار المعلم يدويًا.';
+      }
+    } catch (err) {
+      sendStatus.textContent = '⚠️ تعذّر الاتصال بالإنترنت لإرسال النتيجة.';
+    }
+  });
+</script>
+
+</body>
+</html>
